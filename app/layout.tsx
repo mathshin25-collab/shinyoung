@@ -26,8 +26,8 @@ export default function RootLayout({
               </div>
               <nav className="hidden md:flex space-x-8">
                 {/* 여기에 새로운 네비게이션 링크를 추가하세요 */}
-                <a href="#" className="text-pink-900/70 dark:text-pink-100/70 hover:text-pink-500 px-3 py-2 rounded-full text-sm font-semibold transition-all hover:bg-pink-50 dark:hover:bg-pink-900/50">강의소개</a>
-                <a href="#" className="text-pink-900/70 dark:text-pink-100/70 hover:text-pink-500 px-3 py-2 rounded-full text-sm font-semibold transition-all hover:bg-pink-50 dark:hover:bg-pink-900/50">수강신청</a>
+                <a href="#" className="text-pink-900/70 dark:text-pink-100/70 hover:text-pink-500 px-3 py-2 rounded-full text-sm font-semibold transition-all hover:bg-pink-50 dark:hover:bg-pink-900/50">수업진도</a>
+                <a href="#" className="text-pink-900/70 dark:text-pink-100/70 hover:text-pink-500 px-3 py-2 rounded-full text-sm font-semibold transition-all hover:bg-pink-50 dark:hover:bg-pink-900/50">수업자료</a>
                 <a href="#" className="text-pink-900/70 dark:text-pink-100/70 hover:text-pink-500 px-3 py-2 rounded-full text-sm font-semibold transition-all hover:bg-pink-50 dark:hover:bg-pink-900/50">공지사항</a>
               </nav>
             </div>
