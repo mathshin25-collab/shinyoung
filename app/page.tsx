@@ -28,6 +28,14 @@ export default function Home() {
             일차부등식 게임 ✨
           </Link>
           
+          <Link href="/game/mini" className="px-8 py-3 md:py-4 md:px-10 md:text-lg rounded-full font-bold text-white bg-orange-400 hover:bg-orange-500 transition-all shadow-[0_4px_20px_rgba(249,115,22,0.4)] hover:shadow-[0_4px_25px_rgba(249,115,22,0.6)] hover:-translate-y-0.5 active:translate-y-0 text-center">
+            10초 암산 게임 🔥
+          </Link>
+          
+          <Link href="/ranking" className="px-8 py-3 md:py-4 md:px-10 md:text-lg rounded-full font-bold text-yellow-600 bg-yellow-50 hover:bg-yellow-100 transition-all shadow-[0_4px_20px_rgba(234,179,8,0.2)] hover:-translate-y-0.5 active:translate-y-0 border border-yellow-200 text-center">
+            명예의 전당 🏆
+          </Link>
+
           <Link href="/chat" className="px-8 py-3 md:py-4 md:px-10 md:text-lg rounded-full font-bold text-pink-500 bg-white dark:bg-pink-900/20 border-2 border-pink-100 dark:border-pink-900 hover:bg-pink-50 dark:hover:bg-pink-900/40 transition-all shadow-[0_4px_20px_rgba(255,182,193,0.2)] hover:shadow-[0_4px_25px_rgba(255,182,193,0.4)] hover:-translate-y-0.5 active:translate-y-0 text-center">
             신영쌤 AI에게 질문하기 🤖
           </Link>

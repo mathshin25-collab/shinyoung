@@ -17,6 +17,9 @@ export default function InequalityGame() {
   const [timeLeft, setTimeLeft] = useState(120);
   const [currentProblem, setCurrentProblem] = useState<Problem | null>(null);
   const [feedback, setFeedback] = useState<{ type: "correct" | "wrong"; message: string } | null>(null);
+  const [playerName, setPlayerName] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const generateProblem = useCallback(() => {
     const a = Math.floor(Math.random() * 5) + 1;
@@ -46,8 +49,26 @@ export default function InequalityGame() {
     setScore(0);
     setLives(3);
     setTimeLeft(120);
+    setSubmitted(false);
+    setPlayerName("");
     setGameState("playing");
     generateProblem();
+  };
+
+  const submitScore = async () => {
+    if (!playerName.trim()) return;
+    setIsSubmitting(true);
+    try {
+      await fetch('/api/rankings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name: playerName, score, game: 'inequality' })
+      });
+      setSubmitted(true);
+    } catch (error) {
+      console.error(error);
+    }
+    setIsSubmitting(false);
   };
 
   useEffect(() => {
@@ -192,6 +213,31 @@ export default function InequalityGame() {
             <p className="text-pink-900/60 dark:text-pink-100/60 mb-8">
               대단해요! 다음엔 더 높은 점수에 도전해볼까요? 🎉
             </p>
+
+            {!submitted ? (
+              <div className="max-w-xs mx-auto mb-8 flex flex-col gap-3">
+                <input
+                  type="text"
+                  placeholder="당신의 멋진 닉네임"
+                  maxLength={10}
+                  value={playerName}
+                  onChange={(e) => setPlayerName(e.target.value)}
+                  className="w-full px-4 py-3 rounded-xl border-2 border-pink-200 dark:border-pink-800 bg-white dark:bg-pink-950 focus:outline-none focus:border-pink-400 font-bold text-center"
+                />
+                <button
+                  onClick={submitScore}
+                  disabled={!playerName.trim() || isSubmitting}
+                  className="w-full py-3 bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white rounded-xl font-bold transition-all shadow-md disabled:opacity-50"
+                >
+                  {isSubmitting ? "등록 중..." : "명예의 전당 등록하기 🏆"}
+                </button>
+              </div>
+            ) : (
+              <div className="mb-8 p-4 bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 rounded-xl font-bold flex items-center justify-center gap-2">
+                <CheckCircle2 /> 랭킹 등록 완료!
+              </div>
+            )}
+
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
                 onClick={startGame}
