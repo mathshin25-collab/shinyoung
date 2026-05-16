@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center min-h-[calc(100vh-8rem)] py-12 px-4 sm:px-6 lg:px-8">
@@ -14,13 +16,14 @@ export default function Home() {
         </p>
 
         <div className="flex justify-center gap-4 flex-col sm:flex-row">
-          {/* 가짜(Placeholder) 버튼 */}
-          <button className="px-8 py-3 md:py-4 md:px-10 md:text-lg rounded-full font-bold text-white bg-pink-400 hover:bg-pink-500 transition-all shadow-[0_4px_20px_rgba(255,182,193,0.4)] hover:shadow-[0_4px_25px_rgba(255,182,193,0.6)] hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:ring-offset-2 dark:focus:ring-offset-pink-950">
-            강의 둘러보기 ✨
-          </button>
+          {/* 게임 페이지로 이동하는 버튼 */}
+          <Link href="/game" className="px-8 py-3 md:py-4 md:px-10 md:text-lg rounded-full font-bold text-white bg-pink-400 hover:bg-pink-500 transition-all shadow-[0_4px_20px_rgba(255,182,193,0.4)] hover:shadow-[0_4px_25px_rgba(255,182,193,0.6)] hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:ring-offset-2 dark:focus:ring-offset-pink-950 text-center">
+            부등식 게임 시작하기 ✨
+          </Link>
           
-          {/* 여기에 새로운 기능이나 컴포넌트를 추가하세요 */}
-          {/* <button className="...">다른 버튼</button> */}
+          <button className="px-8 py-3 md:py-4 md:px-10 md:text-lg rounded-full font-bold text-pink-500 bg-white dark:bg-pink-900/20 border-2 border-pink-100 dark:border-pink-900 hover:bg-pink-50 dark:hover:bg-pink-900/40 transition-all">
+            교재 다운로드 📖
+          </button>
         </div>
       </div>
 
