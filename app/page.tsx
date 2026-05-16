@@ -11,8 +11,7 @@ export default function Home() {
         </h1>
         
         <p className="mt-4 max-w-2xl text-lg sm:text-xl text-pink-900/60 dark:text-pink-100/60 mx-auto mb-10">
-          수학이 두려운 당신을 위한 맞춤형 강의. 
-          기초부터 심화까지, 신영쌤과 함께라면 수학이 즐거워집니다.
+          신영쌤과 함께하는 즐거운 수학 시간
         </p>
 
         <div className="flex justify-center gap-4 flex-col sm:flex-row flex-wrap">
