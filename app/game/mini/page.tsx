@@ -15,19 +15,31 @@ export default function MiniGame() {
   const [submitted, setSubmitted] = useState(false);
   const [combo, setCombo] = useState(0);
 
-  const generateProblem = useCallback(() => {
+  const generateProblem = useCallback((currentScore: number) => {
+    // 점수에 따라 난이도(숫자 범위) 증가
+    let maxNum = 20;
+    if (currentScore > 5000) maxNum = 200;
+    else if (currentScore > 2000) maxNum = 100;
+    else if (currentScore > 500) maxNum = 50;
+
     const isAddition = Math.random() > 0.5;
-    const a = Math.floor(Math.random() * 20) + 1;
-    const b = Math.floor(Math.random() * 20) + 1;
+    const isMultiplication = currentScore > 3000 && Math.random() > 0.7; // 고득점 시 곱셈 등장
+
+    let a = Math.floor(Math.random() * maxNum) + 1;
+    let b = Math.floor(Math.random() * maxNum) + 1;
     
     let q = "";
     let ans = 0;
     
-    if (isAddition) {
+    if (isMultiplication) {
+      a = Math.floor(Math.random() * (maxNum / 5)) + 2;
+      b = Math.floor(Math.random() * 9) + 2;
+      q = `${a} × ${b}`;
+      ans = a * b;
+    } else if (isAddition) {
       q = `${a} + ${b}`;
       ans = a + b;
     } else {
-      // Ensure positive result for speed math
       const max = Math.max(a, b);
       const min = Math.min(a, b);
       q = `${max} - ${min}`;
@@ -38,7 +50,9 @@ export default function MiniGame() {
     const opts = new Set<number>();
     opts.add(ans);
     while (opts.size < 4) {
-      const offset = Math.floor(Math.random() * 11) - 5; // -5 to +5
+      const offsetRange = currentScore > 2000 ? 21 : 11;
+      const offsetSubtract = currentScore > 2000 ? 10 : 5;
+      const offset = Math.floor(Math.random() * offsetRange) - offsetSubtract;
       if (offset !== 0 && ans + offset > 0) {
         opts.add(ans + offset);
       }
@@ -55,7 +69,7 @@ export default function MiniGame() {
     setSubmitted(false);
     setPlayerName("");
     setGameState("playing");
-    generateProblem();
+    generateProblem(0);
   };
 
   useEffect(() => {
@@ -75,14 +89,19 @@ export default function MiniGame() {
     if (selected === currentProblem?.a) {
       // Correct: Add time based on combo, add score
       const newCombo = combo + 1;
+      const newScore = score + 10 * newCombo;
       setCombo(newCombo);
-      setScore((s) => s + 10 * newCombo);
-      setTimeLeft((t) => Math.min(20, t + 1)); // Max 20 seconds
-      generateProblem();
+      setScore(newScore);
+      
+      // 점수가 높을수록 주어지는 보상 시간이 줄어듦 (최소 0.3초)
+      const timeReward = Math.max(0.3, 1 - (newScore / 10000));
+      setTimeLeft((t) => Math.min(20, t + timeReward)); 
+      generateProblem(newScore);
     } else {
       // Wrong: Penalize time, reset combo
       setCombo(0);
       setTimeLeft((t) => Math.max(0, t - 2));
+      generateProblem(score);
     }
   };
 
