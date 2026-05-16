@@ -16,19 +16,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${inter.className} min-h-screen flex flex-col`}>
+      <body className={`${inter.className} min-h-screen flex flex-col bg-[var(--background)] text-[var(--foreground)]`}>
         {/* 상단 헤더 */}
-        <header className="w-full bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+        <header className="w-full bg-white/80 dark:bg-pink-950/30 backdrop-blur-md border-b border-pink-100 dark:border-pink-900 sticky top-0 z-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between h-16 items-center">
               <div className="flex-shrink-0 flex items-center">
-                <span className="font-bold text-2xl text-blue-600 dark:text-blue-400">신영쌤</span>
+                <span className="font-bold text-2xl text-pink-500 dark:text-pink-400 tracking-tighter">🌸 신영쌤</span>
               </div>
               <nav className="hidden md:flex space-x-8">
                 {/* 여기에 새로운 네비게이션 링크를 추가하세요 */}
-                <a href="#" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">강의소개</a>
-                <a href="#" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">수강신청</a>
-                <a href="#" className="text-gray-700 dark:text-gray-300 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">공지사항</a>
+                <a href="#" className="text-pink-900/70 dark:text-pink-100/70 hover:text-pink-500 px-3 py-2 rounded-full text-sm font-semibold transition-all hover:bg-pink-50 dark:hover:bg-pink-900/50">강의소개</a>
+                <a href="#" className="text-pink-900/70 dark:text-pink-100/70 hover:text-pink-500 px-3 py-2 rounded-full text-sm font-semibold transition-all hover:bg-pink-50 dark:hover:bg-pink-900/50">수강신청</a>
+                <a href="#" className="text-pink-900/70 dark:text-pink-100/70 hover:text-pink-500 px-3 py-2 rounded-full text-sm font-semibold transition-all hover:bg-pink-50 dark:hover:bg-pink-900/50">공지사항</a>
               </nav>
             </div>
           </div>
@@ -40,9 +40,10 @@ export default function RootLayout({
         </main>
 
         {/* 하단 푸터 */}
-        <footer className="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
-          <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 flex items-center justify-center">
-            <p className="text-center text-sm text-gray-500 dark:text-gray-400">
+        <footer className="bg-pink-50/50 dark:bg-pink-950/20 border-t border-pink-100 dark:border-pink-900">
+          <div className="max-w-7xl mx-auto py-10 px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center gap-2">
+            <span className="text-pink-300 dark:text-pink-700 text-2xl">✿</span>
+            <p className="text-center text-sm text-pink-900/40 dark:text-pink-100/40">
               &copy; {new Date().getFullYear()} 신영쌤의 수학교실. All rights reserved.
             </p>
           </div>
