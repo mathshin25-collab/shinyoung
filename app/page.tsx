@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -7,7 +8,10 @@ export default function Home() {
       <div className="text-center w-full max-w-4xl mx-auto">
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-pink-900 dark:text-pink-100 tracking-tight mb-6">
           <span className="block">신영쌤의</span>
-          <span className="block text-pink-500 dark:text-pink-400 mt-2">수학교실 📚</span>
+          <span className="flex justify-center items-center gap-3 text-pink-500 dark:text-pink-400 mt-2">
+            수학교실
+            <Image src="/logo.png" alt="신영쌤 로고" width={56} height={56} className="rounded-full object-cover shadow-sm" />
+          </span>
         </h1>
         
         <p className="mt-4 max-w-2xl text-lg sm:text-xl text-pink-900/60 dark:text-pink-100/60 mx-auto mb-10">
