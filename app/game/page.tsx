@@ -16,6 +16,8 @@ export default function InequalityGame() {
   const [lives, setLives] = useState(3);
   const [currentProblem, setCurrentProblem] = useState<Problem | null>(null);
   const [feedback, setFeedback] = useState<{ type: "correct" | "wrong"; message: string } | null>(null);
+  const [studentInfo, setStudentInfo] = useState({ gradeClass: "", studentNum: "", name: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const generateProblem = useCallback(() => {
     // Generate ax + b > c or ax + b < c
@@ -46,10 +48,45 @@ export default function InequalityGame() {
   }, []);
 
   const startGame = () => {
+    if (!studentInfo.gradeClass || !studentInfo.studentNum || !studentInfo.name) {
+      alert("반, 번호, 이름을 모두 입력해주세요!");
+      return;
+    }
     setScore(0);
     setLives(3);
     setGameState("playing");
     generateProblem();
+  };
+
+  const submitScore = async (finalScore: number) => {
+    setIsSubmitting(true);
+    try {
+      // 구글 앱스 스크립트 웹앱 URL (환경변수 또는 직접 입력)
+      const scriptUrl = process.env.NEXT_PUBLIC_GOOGLE_SCRIPT_URL || "";
+      if (!scriptUrl) {
+        console.warn("Google Script URL is not set.");
+        setIsSubmitting(false);
+        return;
+      }
+      
+      await fetch(scriptUrl, {
+        method: "POST",
+        mode: "no-cors", // CORS 우회를 위해 no-cors 사용
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          gradeClass: studentInfo.gradeClass,
+          studentNum: studentInfo.studentNum,
+          name: studentInfo.name,
+          score: finalScore,
+          date: new Date().toISOString()
+        }),
+      });
+    } catch (error) {
+      console.error("Error submitting score:", error);
+    }
+    setIsSubmitting(false);
   };
 
   const handleAnswer = (option: string) => {
@@ -62,17 +99,21 @@ export default function InequalityGame() {
         generateProblem();
       }, 1500);
     } else {
-      setLives((l) => l - 1);
+      setLives((l) => {
+        const newLives = l - 1;
+        if (newLives <= 0) {
+          setTimeout(() => {
+            setGameState("end");
+            submitScore(score); // 게임 종료 시 점수 전송
+          }, 1500);
+        } else {
+          setTimeout(() => {
+            generateProblem();
+          }, 1500);
+        }
+        return newLives;
+      });
       setFeedback({ type: "wrong", message: `아쉬워요! 정답은 ${currentProblem?.answer} 였어요. 😢` });
-      if (lives <= 1) {
-        setTimeout(() => {
-          setGameState("end");
-        }, 1500);
-      } else {
-        setTimeout(() => {
-          generateProblem();
-        }, 1500);
-      }
     }
   };
 
@@ -92,9 +133,38 @@ export default function InequalityGame() {
               신영쌤과 함께 일차부등식을 마스터해볼까요?<br />
               정답을 맞힐 때마다 10점을 얻고, 기회는 3번이에요!
             </p>
+
+            <div className="max-w-md mx-auto space-y-4 mb-8 bg-pink-50 dark:bg-pink-900/20 p-6 rounded-2xl border border-pink-100 dark:border-pink-900 text-left">
+              <label className="block text-sm font-bold text-pink-900 dark:text-pink-100 mb-1">학번 및 이름 입력</label>
+              <div className="flex gap-2">
+                <input 
+                  type="number" 
+                  placeholder="반" 
+                  className="w-1/3 px-4 py-2 rounded-xl border border-pink-200 dark:border-pink-800 bg-white dark:bg-pink-950 focus:outline-none focus:ring-2 focus:ring-pink-400"
+                  value={studentInfo.gradeClass}
+                  onChange={(e) => setStudentInfo({...studentInfo, gradeClass: e.target.value})}
+                />
+                <input 
+                  type="number" 
+                  placeholder="번호" 
+                  className="w-1/3 px-4 py-2 rounded-xl border border-pink-200 dark:border-pink-800 bg-white dark:bg-pink-950 focus:outline-none focus:ring-2 focus:ring-pink-400"
+                  value={studentInfo.studentNum}
+                  onChange={(e) => setStudentInfo({...studentInfo, studentNum: e.target.value})}
+                />
+                <input 
+                  type="text" 
+                  placeholder="이름" 
+                  className="w-1/3 px-4 py-2 rounded-xl border border-pink-200 dark:border-pink-800 bg-white dark:bg-pink-950 focus:outline-none focus:ring-2 focus:ring-pink-400"
+                  value={studentInfo.name}
+                  onChange={(e) => setStudentInfo({...studentInfo, name: e.target.value})}
+                />
+              </div>
+            </div>
+
             <button
               onClick={startGame}
-              className="px-10 py-4 bg-pink-400 hover:bg-pink-500 text-white rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-pink-200 dark:hover:shadow-none"
+              className="px-10 py-4 bg-pink-400 hover:bg-pink-500 text-white rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-pink-200 dark:hover:shadow-none disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled={!studentInfo.gradeClass || !studentInfo.studentNum || !studentInfo.name}
             >
               게임 시작하기 ✨
             </button>
@@ -172,8 +242,7 @@ export default function InequalityGame() {
             </h1>
             <p className="text-5xl font-black text-pink-500 mb-4">{score}점</p>
             <p className="text-pink-900/60 dark:text-pink-100/60 mb-8">
-              정말 훌륭한 실력이네요!<br />
-              부등식이 조금 더 쉬워졌나요?
+              {isSubmitting ? "선생님께 결과를 전송하는 중... 📡" : "결과가 선생님께 전송되었습니다! 훌륭해요! 🎉"}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
