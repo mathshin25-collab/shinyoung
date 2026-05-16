@@ -27,10 +27,10 @@ export default function Home() {
         </div>
       </div>
 
-      {/* 유정쌤의 실험실 링크 섹션 */}
+      {/* 신영쌤의 실험실 링크 섹션 */}
       <div className="mt-24 w-full max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold text-pink-900 dark:text-pink-100 mb-4">유정쌤의 실험실 게임 모음 🧪</h2>
+          <h2 className="text-3xl font-bold text-pink-900 dark:text-pink-100 mb-4">신영쌤의 실험실 게임 모음 🧪</h2>
           <p className="text-pink-900/60 dark:text-pink-100/60">다양하고 재미있는 인터랙티브 수학 게임들을 즐겨보세요!</p>
         </div>
         
@@ -42,7 +42,7 @@ export default function Home() {
             { title: "수학 다이스 팀 배틀", emoji: "🎲", desc: "주사위 숫자로 수식을 만들어 친구들과 실시간 대결", url: "https://mathmath-psi.vercel.app/programs/math_dice.html" },
             { title: "수학 변환 기계", emoji: "⚙️", desc: "입력값이 어떤 규칙으로 변하는지 함수를 추론하는 게임", url: "https://mathmath-psi.vercel.app/programs/transformer.html" },
             { title: "대수막대 일차식 학습", emoji: "🧱", desc: "대수막대를 옮기며 일차식의 덧셈, 뺄셈, 분배법칙 완벽 이해", url: "https://mathmath-psi.vercel.app/programs/algebra_tiles.html" },
-            { title: "유정쌤의 대수저울", emoji: "⚖️", desc: "양변에 같은 연산을 하여 일차방정식의 해를 구하는 저울 게임", url: "https://mathmath-psi.vercel.app/programs/algebra_balance.html" },
+            { title: "신영쌤의 대수저울", emoji: "⚖️", desc: "양변에 같은 연산을 하여 일차방정식의 해를 구하는 저울 게임", url: "https://mathmath-psi.vercel.app/programs/algebra_balance.html" },
             { title: "일차방정식 릴레이 배틀", emoji: "🏃‍♂️", desc: "팀원들과 협력하여 일차방정식을 빠르게 해결하는 릴레이", url: "https://mathmath-psi.vercel.app/programs/equation_relay.html" },
             { title: "일차방정식 방탈출", emoji: "🚪", desc: "일차방정식의 비밀을 풀어 스산한 저택을 탈출하세요", url: "https://mathmath-psi.vercel.app/programs/escape_room.html" },
             { title: "좌표평면 오목두기", emoji: "⚫⚪", desc: "X, Y 좌표를 직접 선택하며 오목을 두는 좌표평면 학습", url: "https://mathmath-psi.vercel.app/programs/omok.html" },
