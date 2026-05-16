@@ -15,15 +15,15 @@ export default function Home() {
           기초부터 심화까지, 신영쌤과 함께라면 수학이 즐거워집니다.
         </p>
 
-        <div className="flex justify-center gap-4 flex-col sm:flex-row">
+        <div className="flex justify-center gap-4 flex-col sm:flex-row flex-wrap">
           {/* 게임 페이지로 이동하는 버튼 */}
           <Link href="/game" className="px-8 py-3 md:py-4 md:px-10 md:text-lg rounded-full font-bold text-white bg-pink-400 hover:bg-pink-500 transition-all shadow-[0_4px_20px_rgba(255,182,193,0.4)] hover:shadow-[0_4px_25px_rgba(255,182,193,0.6)] hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:ring-offset-2 dark:focus:ring-offset-pink-950 text-center">
             부등식 게임 시작하기 ✨
           </Link>
           
-          <button className="px-8 py-3 md:py-4 md:px-10 md:text-lg rounded-full font-bold text-pink-500 bg-white dark:bg-pink-900/20 border-2 border-pink-100 dark:border-pink-900 hover:bg-pink-50 dark:hover:bg-pink-900/40 transition-all">
-            교재 다운로드 📖
-          </button>
+          <Link href="/chat" className="px-8 py-3 md:py-4 md:px-10 md:text-lg rounded-full font-bold text-pink-500 bg-white dark:bg-pink-900/20 border-2 border-pink-100 dark:border-pink-900 hover:bg-pink-50 dark:hover:bg-pink-900/40 transition-all shadow-[0_4px_20px_rgba(255,182,193,0.2)] hover:shadow-[0_4px_25px_rgba(255,182,193,0.4)] hover:-translate-y-0.5 active:translate-y-0 text-center">
+            신영쌤 AI에게 질문하기 🤖
+          </Link>
         </div>
       </div>
 
