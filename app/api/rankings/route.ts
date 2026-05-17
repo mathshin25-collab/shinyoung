@@ -9,11 +9,8 @@ const databaseUrl = process.env.DATABASE_URL;
 // 로컬 및 DB에 연결할 수 없는 환경을 위한 인메모리 및 로컬 파일 폴백용 저장소
 const filePath = path.join(process.cwd(), 'rankings.json');
 
-const defaultRankings = [
-  { name: "신영쌤", score: 1000, game: "prime", date: "2026-05-16T12:00:00.000Z" },
-  { name: "수학천재", score: 850, game: "inequality", date: "2026-05-16T13:00:00.000Z" },
-  { name: "김구례", score: 500, game: "mini", date: "2026-05-16T14:00:00.000Z" }
-];
+// 초기 데이터 완전히 제거 (빈 슬레이트 시작)
+const defaultRankings: any[] = [];
 
 let memoryRankings: any[] | null = null;
 
@@ -24,14 +21,20 @@ function getLocalRankings(): any[] {
   }
   try {
     if (!fs.existsSync(filePath)) {
-      const initData = defaultRankings.map((r, i) => ({ id: i + 1, ...r }));
-      fs.writeFileSync(filePath, JSON.stringify(initData, null, 2), 'utf-8');
-      return initData;
+      fs.writeFileSync(filePath, JSON.stringify([], null, 2), 'utf-8');
+      return [];
     }
     const data = fs.readFileSync(filePath, 'utf-8');
-    return JSON.parse(data);
+    const list = JSON.parse(data);
+    
+    // 기존 로컬 파일에 존재하던 초기 데이터("신영쌤", "수학천재", "김구례")도 동적 제거 처리
+    const cleaned = list.filter((r: any) => !["신영쌤", "수학천재", "김구례"].includes(r.name));
+    if (cleaned.length !== list.length) {
+      fs.writeFileSync(filePath, JSON.stringify(cleaned, null, 2), 'utf-8');
+    }
+    return cleaned;
   } catch (error) {
-    memoryRankings = defaultRankings.map((r, i) => ({ id: i + 1, ...r }));
+    memoryRankings = [];
     return memoryRankings;
   }
 }
@@ -54,7 +57,7 @@ function saveLocalRanking(newRecord: any) {
   }
 }
 
-// Neon DB 초기화 함수 (테이블이 없을 시 테이블을 생성하고 기본 레코드를 삽입)
+// Neon DB 초기화 함수 (테이블 생성 및 기존 초기 데이터 정리)
 async function initNeonDb(sql: any) {
   try {
     // 1. 테이블 생성
@@ -68,22 +71,13 @@ async function initNeonDb(sql: any) {
       )
     `;
 
-    // 2. 데이터가 완전히 비어 있는지 검사
-    const countResult = await sql`SELECT COUNT(*)::integer FROM rankings`;
-    const count = countResult[0].count;
-
-    if (count === 0) {
-      // 3. 기본 데이터(신영쌤, 수학천재, 김구례) 자동 삽입
-      for (const r of defaultRankings) {
-        await sql`
-          INSERT INTO rankings (name, score, game, date)
-          VALUES (${r.name}, ${r.score}, ${r.game}, ${r.date})
-        `;
-      }
-      console.log("Neon DB: 초기 기본 랭킹 데이터 삽입 완료!");
-    }
+    // 2. Neon DB에 기록된 기존 초기 데이터("신영쌤", "수학천재", "김구례") 강제 삭제 클리닝
+    await sql`
+      DELETE FROM rankings 
+      WHERE name IN ('신영쌤', '수학천재', '김구례')
+    `;
   } catch (err) {
-    console.error("Neon DB 초기화 중 오류:", err);
+    console.error("Neon DB 초기화/정리 중 오류:", err);
   }
 }
 
@@ -96,7 +90,7 @@ export async function GET(request: Request) {
     try {
       const sql = neon(databaseUrl);
       
-      // 테이블 자동 검증 및 초기화
+      // 테이블 자동 검증 및 기존 초기 데이터 제거
       await initNeonDb(sql);
 
       let result;
