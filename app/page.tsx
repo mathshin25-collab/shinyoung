@@ -39,6 +39,10 @@ export default function Home() {
           <Link href="/chat" className="px-8 py-3 md:py-4 md:px-10 md:text-lg rounded-full font-bold text-pink-500 bg-white dark:bg-pink-900/20 border-2 border-pink-100 dark:border-pink-900 hover:bg-pink-50 dark:hover:bg-pink-900/40 transition-all shadow-[0_4px_20px_rgba(255,182,193,0.2)] hover:shadow-[0_4px_25px_rgba(255,182,193,0.4)] hover:-translate-y-0.5 active:translate-y-0 text-center">
             신영쌤 AI에게 질문하기 🤖
           </Link>
+
+          <Link href="/upload" className="px-8 py-3 md:py-4 md:px-10 md:text-lg rounded-full font-bold text-purple-600 bg-purple-50 hover:bg-purple-100 border border-purple-200 transition-all shadow-[0_4px_20px_rgba(168,85,247,0.1)] hover:-translate-y-0.5 active:translate-y-0 text-center">
+            이미지 업로드 📷
+          </Link>
         </div>
       </div>
 
