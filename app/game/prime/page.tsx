@@ -227,8 +227,14 @@ export default function PrimeGame() {
                 <RefreshCcw className="w-5 h-5" /> 다시 하기
               </button>
               <Link
+                href="/ranking"
+                className="flex items-center justify-center gap-2 px-8 py-3 bg-white dark:bg-pink-900/20 border-2 border-pink-100 dark:border-pink-900 text-pink-900 dark:text-pink-100 rounded-full font-bold transition-all hover:bg-pink-50 dark:hover:bg-pink-900/40"
+              >
+                <Trophy className="w-5 h-5" /> 랭킹 확인
+              </Link>
+              <Link
                 href="/"
-                className="flex items-center justify-center gap-2 px-8 py-3 bg-white dark:bg-pink-900/20 border-2 border-pink-100 dark:border-pink-900 text-pink-900 dark:text-pink-100 rounded-full font-bold transition-all"
+                className="flex items-center justify-center gap-2 px-8 py-3 bg-white dark:bg-pink-900/20 border-2 border-pink-100 dark:border-pink-900 text-pink-900 dark:text-pink-100 rounded-full font-bold transition-all hover:bg-pink-50 dark:hover:bg-pink-900/40"
               >
                 <ArrowLeft className="w-5 h-5" /> 메인으로
               </Link>
