@@ -8,7 +8,7 @@ export default function PrimeGame() {
   const [gameState, setGameState] = useState<"start" | "playing" | "end">("start");
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(60);
-  const [lives, setLives] = useState(10);
+  const [lives, setLives] = useState(3);
   const [currentNumber, setCurrentNumber] = useState<number>(2);
   const [feedback, setFeedback] = useState<{ type: "correct" | "wrong"; message: string } | null>(null);
   const [playerName, setPlayerName] = useState("");
@@ -32,7 +32,7 @@ export default function PrimeGame() {
   const startGame = () => {
     setScore(0);
     setTimeLeft(60);
-    setLives(10);
+    setLives(3);
     setSubmitted(false);
     setPlayerName("");
     setGameState("playing");
@@ -130,7 +130,7 @@ export default function PrimeGame() {
               <div className="flex items-center gap-2 font-black text-xl text-pink-500 bg-pink-50 dark:bg-pink-900/20 px-4 py-2 rounded-full">
                 <Timer className="w-5 h-5" /> {timeLeft}珥?              </div>
               <div className="flex items-center gap-1">
-                {[...Array(10)].map((_, i) => (
+                {[...Array(3)].map((_, i) => (
                   <Heart
                     key={i}
                     className={`w-6 h-6 transition-colors ${
@@ -242,4 +242,5 @@ export default function PrimeGame() {
     </div>
   );
 }
+
 

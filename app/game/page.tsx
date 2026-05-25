@@ -13,7 +13,7 @@ type Problem = {
 export default function InequalityGame() {
   const [gameState, setGameState] = useState<"start" | "playing" | "end">("start");
   const [score, setScore] = useState(0);
-  const [lives, setLives] = useState(10);
+  const [lives, setLives] = useState(3);
   const [timeLeft, setTimeLeft] = useState(120);
   const [currentProblem, setCurrentProblem] = useState<Problem | null>(null);
   const [feedback, setFeedback] = useState<{ type: "correct" | "wrong"; message: string } | null>(null);
@@ -47,7 +47,7 @@ export default function InequalityGame() {
 
   const startGame = () => {
     setScore(0);
-    setLives(10);
+    setLives(3);
     setTimeLeft(120);
     setSubmitted(false);
     setPlayerName("");
@@ -147,7 +147,7 @@ export default function InequalityGame() {
                 <Timer className="w-5 h-5" /> {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
               </div>
               <div className="flex items-center gap-1">
-                {[...Array(10)].map((_, i) => (
+                {[...Array(3)].map((_, i) => (
                   <Heart
                     key={i}
                     className={`w-6 h-6 transition-colors ${
@@ -263,4 +263,5 @@ export default function InequalityGame() {
     </div>
   );
 }
+
 
