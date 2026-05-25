@@ -23,6 +23,10 @@ export default function Home() {
             소수 찾기 게임 ⚡
           </Link>
 
+          <Link href="/game/basic" className="px-8 py-3 md:py-4 md:px-10 md:text-lg rounded-full font-bold text-white bg-emerald-400 hover:bg-emerald-500 transition-all shadow-[0_4px_20px_rgba(52,211,153,0.4)] hover:shadow-[0_4px_25px_rgba(52,211,153,0.6)] hover:-translate-y-0.5 active:translate-y-0 text-center">
+            기초 탄탄 마라톤 🌱
+          </Link>
+
           {/* 게임 페이지로 이동하는 버튼 */}
           <Link href="/game" className="px-8 py-3 md:py-4 md:px-10 md:text-lg rounded-full font-bold text-white bg-pink-400 hover:bg-pink-500 transition-all shadow-[0_4px_20px_rgba(255,182,193,0.4)] hover:shadow-[0_4px_25px_rgba(255,182,193,0.6)] hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:ring-offset-2 dark:focus:ring-offset-pink-950 text-center">
             일차부등식 게임 ✨
