@@ -194,12 +194,12 @@ export default function BasicMathGame() {
   const [gameState, setGameState] = useState<"start" | "playing" | "end">("start");
   const [currentProblemIndex, setCurrentProblemIndex] = useState(0);
   const [score, setScore] = useState(0);
-  const [lives, setLives] = useState(3);
+  const [lives, setLives] = useState(5);
   const [feedback, setFeedback] = useState<{ type: "correct" | "wrong"; message: string } | null>(null);
 
   const startGame = () => {
     setScore(0);
-    setLives(3);
+    setLives(5);
     setCurrentProblemIndex(0);
     setGameState("playing");
     setFeedback(null);
@@ -247,7 +247,7 @@ export default function BasicMathGame() {
             <p className="text-emerald-900/70 dark:text-emerald-100/70 mb-8 text-lg font-medium leading-relaxed">
               중2 수학 기초를 다지는 25단계 스테이지!<br />
               올려주신 향상도 검사지와 동형 문제들로 구성했어요.<br />
-              <strong className="text-emerald-600 dark:text-emerald-400">하트는 총 3개!</strong> 끝까지 클리어해 볼까요?
+              <strong className="text-emerald-600 dark:text-emerald-400">하트는 총 5개!</strong> 끝까지 클리어해 볼까요?
             </p>
             <button
               onClick={startGame}
@@ -267,7 +267,7 @@ export default function BasicMathGame() {
                 </div>
               </div>
               <div className="flex items-center gap-1">
-                {[...Array(3)].map((_, i) => (
+                {[...Array(5)].map((_, i) => (
                   <Heart
                     key={i}
                     className={`w-7 h-7 transition-all duration-300 ${

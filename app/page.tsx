@@ -27,6 +27,10 @@ export default function Home() {
             기초 탄탄 마라톤 🌱
           </Link>
 
+          <Link href="/game/basic2" className="px-8 py-3 md:py-4 md:px-10 md:text-lg rounded-full font-bold text-white bg-violet-400 hover:bg-violet-500 transition-all shadow-[0_4px_20px_rgba(139,92,246,0.4)] hover:shadow-[0_4px_25px_rgba(139,92,246,0.6)] hover:-translate-y-0.5 active:translate-y-0 text-center">
+            기초 탄탄 2탄 🚀
+          </Link>
+
           {/* 게임 페이지로 이동하는 버튼 */}
           <Link href="/game" className="px-8 py-3 md:py-4 md:px-10 md:text-lg rounded-full font-bold text-white bg-pink-400 hover:bg-pink-500 transition-all shadow-[0_4px_20px_rgba(255,182,193,0.4)] hover:shadow-[0_4px_25px_rgba(255,182,193,0.6)] hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-pink-300 focus:ring-offset-2 dark:focus:ring-offset-pink-950 text-center">
             일차부등식 게임 ✨
