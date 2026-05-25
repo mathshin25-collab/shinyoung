@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect, useCallback } from "react";
 import { ArrowLeft, Trophy, Heart, RefreshCcw, CheckCircle2, XCircle, Timer } from "lucide-react";
@@ -88,7 +88,7 @@ export default function InequalityGame() {
 
     if (option === currentProblem?.answer) {
       setScore((s) => s + 10);
-      setFeedback({ type: "correct", message: "?뺣떟?댁뿉?? 李??섑뻽?댁슂! ?? });
+      setFeedback({ type: "correct", message: "정답이에요! 참 잘했어요! ✨" });
       setTimeout(() => {
         generateProblem();
       }, 1500);
@@ -106,7 +106,7 @@ export default function InequalityGame() {
         }
         return newLives;
       });
-      setFeedback({ type: "wrong", message: `?꾩돩?뚯슂! ?뺣떟? ${currentProblem?.answer} ??댁슂. ?삟` });
+      setFeedback({ type: "wrong", message: `아쉬워요! 정답은 ${currentProblem?.answer} 였어요. 😢` });
     }
   };
 
@@ -120,19 +120,20 @@ export default function InequalityGame() {
               <Trophy className="w-12 h-12 text-pink-500" />
             </div>
             <h1 className="text-3xl font-bold text-pink-900 dark:text-pink-100 mb-4">
-              ?쇱감遺?깆떇 梨뚮┛吏 ?뙵
+              일차부등식 챌린지 🌸
             </h1>
             <p className="text-pink-900/60 dark:text-pink-100/60 mb-8 text-lg">
-              ?좎쁺?ㅺ낵 ?④퍡 ?쇱감遺?깆떇??留덉뒪?고빐蹂쇨퉴??<br />
-              ?쒗븳?쒓컙 <strong>2遺?/strong> ?숈븞 理쒕???留롮? 臾몄젣瑜?留욎떠蹂댁꽭??<br />
-              湲고쉶??<strong>3踰?/strong>?낅땲??
+              신영쌤과 함께 일차부등식을 마스터해볼까요?<br />
+              제한시간 <strong>2분</strong> 동안 최대한 많은 문제를 맞춰보세요!<br />
+              기회는 <strong>3번</strong>입니다.
             </p>
 
             <button
               onClick={startGame}
               className="px-10 py-4 bg-pink-400 hover:bg-pink-500 text-white rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-pink-200 dark:hover:shadow-none"
             >
-              寃뚯엫 ?쒖옉?섍린 ??            </button>
+              게임 시작하기 ✨
+            </button>
           </div>
         )}
 
@@ -206,18 +207,18 @@ export default function InequalityGame() {
               <Trophy className="w-12 h-12 text-yellow-500" />
             </div>
             <h1 className="text-3xl font-bold text-pink-900 dark:text-pink-100 mb-2">
-              寃뚯엫 醫낅즺!
+              게임 종료!
             </h1>
-            <p className="text-5xl font-black text-pink-500 mb-4">{score}??/p>
+            <p className="text-5xl font-black text-pink-500 mb-4">{score}점</p>
             <p className="text-pink-900/60 dark:text-pink-100/60 mb-8">
-              ??⑦빐?? ?ㅼ쓬?????믪? ?먯닔???꾩쟾?대낵源뚯슂? ?럦
+              대단해요! 다음엔 더 높은 점수에 도전해볼까요? 🎉
             </p>
 
             {!submitted ? (
               <div className="max-w-xs mx-auto mb-8 flex flex-col gap-3">
                 <input
                   type="text"
-                  placeholder="?뱀떊??硫뗭쭊 ?됰꽕??
+                  placeholder="당신의 멋진 닉네임"
                   maxLength={10}
                   value={playerName}
                   onChange={(e) => setPlayerName(e.target.value)}
@@ -228,12 +229,12 @@ export default function InequalityGame() {
                   disabled={!playerName.trim() || isSubmitting}
                   className="w-full py-3 bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white rounded-xl font-bold transition-all shadow-md disabled:opacity-50"
                 >
-                  {isSubmitting ? "?깅줉 以?.." : "紐낆삁???꾨떦 ?깅줉?섍린 ?룇"}
+                  {isSubmitting ? "등록 중..." : "명예의 전당 등록하기 🏆"}
                 </button>
               </div>
             ) : (
               <div className="mb-8 p-4 bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 rounded-xl font-bold flex items-center justify-center gap-2">
-                <CheckCircle2 /> ??궧 ?깅줉 ?꾨즺!
+                <CheckCircle2 /> 랭킹 등록 완료!
               </div>
             )}
 
@@ -242,19 +243,19 @@ export default function InequalityGame() {
                 onClick={startGame}
                 className="flex items-center justify-center gap-2 px-8 py-3 bg-pink-400 hover:bg-pink-500 text-white rounded-full font-bold transition-all shadow-lg"
               >
-                <RefreshCcw className="w-5 h-5" /> ?ㅼ떆 ?섍린
+                <RefreshCcw className="w-5 h-5" /> 다시 하기
               </button>
               <Link
                 href="/ranking"
                 className="flex items-center justify-center gap-2 px-8 py-3 bg-white dark:bg-pink-900/20 border-2 border-pink-100 dark:border-pink-900 text-pink-900 dark:text-pink-100 rounded-full font-bold transition-all hover:bg-pink-50 dark:hover:bg-pink-900/40"
               >
-                <Trophy className="w-5 h-5" /> ??궧 ?뺤씤
+                <Trophy className="w-5 h-5" /> 랭킹 확인
               </Link>
               <Link
                 href="/"
                 className="flex items-center justify-center gap-2 px-8 py-3 bg-white dark:bg-pink-900/20 border-2 border-pink-100 dark:border-pink-900 text-pink-900 dark:text-pink-100 rounded-full font-bold transition-all hover:bg-pink-50 dark:hover:bg-pink-900/40"
               >
-                <ArrowLeft className="w-5 h-5" /> 硫붿씤?쇰줈
+                <ArrowLeft className="w-5 h-5" /> 메인으로
               </Link>
             </div>
           </div>
@@ -263,5 +264,3 @@ export default function InequalityGame() {
     </div>
   );
 }
-
-
