@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { ArrowLeft, Trophy, Lock, Unlock, Timer, XCircle } from "lucide-react";
+import { ArrowLeft, Trophy, Lock, Unlock, Timer, XCircle, RefreshCcw } from "lucide-react";
 import Link from "next/link";
 
 type Problem = {
