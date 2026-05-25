@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { ArrowLeft, Trophy, Lock, Unlock, Timer, AlertTriangle } from "lucide-react";
+import { ArrowLeft, Trophy, Lock, Unlock, Timer, XCircle } from "lucide-react";
 import Link from "next/link";
 
 type Problem = {
@@ -41,15 +41,18 @@ const generateSystemEq = (): Problem => {
     const absCoef = Math.abs(coef);
     if (absCoef !== 1) {
       str += absCoef;
-    } else if (absCoef === 1) {
-      // Just the minus sign if it's negative and first, otherwise handled above
     }
     str += varName;
     return str;
   };
 
-  const eq1 = `${formatTerm(a1, 'x', true)}${formatTerm(b1, 'y', false)} = ${c1}`;
-  const eq2 = `${formatTerm(a2, 'x', true)}${formatTerm(b2, 'y', false)} = ${c2}`;
+  const term1_x = formatTerm(a1, 'x', true);
+  const term1_y = formatTerm(b1, 'y', term1_x === "");
+  const eq1 = `${term1_x}${term1_y} = ${c1}`;
+  
+  const term2_x = formatTerm(a2, 'x', true);
+  const term2_y = formatTerm(b2, 'y', term2_x === "");
+  const eq2 = `${term2_x}${term2_y} = ${c2}`;
 
   return {
     question: [eq1, eq2],
@@ -211,7 +214,7 @@ export default function SystemEqGame() {
               )}
               {feedback === "wrong" && (
                 <div className="flex items-center gap-2 text-red-500 font-bold animate-pulse text-lg">
-                  <AlertTriangle className="w-6 h-6" /> ACCESS DENIED
+                  <XCircle className="w-6 h-6" /> ACCESS DENIED
                 </div>
               )}
             </div>
