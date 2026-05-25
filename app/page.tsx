@@ -28,7 +28,11 @@ export default function Home() {
           </Link>
 
           <Link href="/game/basic2" className="px-8 py-3 md:py-4 md:px-10 md:text-lg rounded-full font-bold text-white bg-violet-400 hover:bg-violet-500 transition-all shadow-[0_4px_20px_rgba(139,92,246,0.4)] hover:shadow-[0_4px_25px_rgba(139,92,246,0.6)] hover:-translate-y-0.5 active:translate-y-0 text-center">
-            기초 탄탄 2탄 🚀
+            기초 탄탄 마라톤 2탄 🚀
+          </Link>
+
+          <Link href="/game/system-eq" className="px-8 py-3 md:py-4 md:px-10 md:text-lg rounded-full font-bold text-cyan-300 bg-zinc-900 border border-cyan-500 hover:bg-cyan-950 transition-all shadow-[0_4px_20px_rgba(6,182,212,0.3)] hover:shadow-[0_4px_25px_rgba(6,182,212,0.5)] hover:-translate-y-0.5 active:translate-y-0 text-center uppercase tracking-wider">
+            연립방정식 해킹 🔐
           </Link>
 
           {/* 게임 페이지로 이동하는 버튼 */}

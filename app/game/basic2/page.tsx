@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState } from "react";
 import { ArrowLeft, Trophy, Heart, RefreshCcw, CheckCircle2, XCircle, ChevronRight, Rocket } from "lucide-react";
@@ -13,43 +13,43 @@ type Problem = {
 };
 
 const PROBLEMS: Problem[] = [
-  { id: 1, question: "다음 수 중 소수를 모두 고른 것은?\n{2, 7, 9, 14, 17, 21, 23}", options: ["2, 7, 17", "2, 7, 17, 23", "7, 17, 23", "2, 9, 17, 21"], answer: "2, 7, 17, 23", explanation: "소수는 1과 자기 자신만을 약수로 가지는 수입니다. 2, 7, 17, 23이 소수입니다!" },
-  { id: 2, question: "다음은 120을 소인수분해하는 과정이다. (가)와 (나)에 들어갈 수의 합은?\n120 = 2³ × (가)\n(가) = 3 × (나)", options: ["15", "20", "25", "30"], answer: "20", explanation: "120 = 8 × 15 이므로 (가)는 15입니다. 15 = 3 × 5 이므로 (나)는 5입니다. 합은 15 + 5 = 20 입니다." },
-  { id: 3, question: "36(2²×3²)과 40(2³×5)의 최소공배수는?", options: ["2²×3²", "2³×3²×5", "2³×5", "2²×3²×5"], answer: "2³×3²×5", explanation: "최소공배수는 공통인 소인수 중 지수가 큰 것과 공통이 아닌 것을 모두 곱하므로 2³ × 3² × 5 (360) 입니다." },
-  { id: 4, question: "정수와 유리수에 대한 설명 중 옳은 것은?", options: ["모든 유리수는 정수이다.", "모든 정수는 유리수이다.", "0은 유리수가 아니다.", "자연수는 음의 정수이다."], answer: "모든 정수는 유리수이다.", explanation: "정수는 분수 꼴로 나타낼 수 있으므로 모두 유리수에 포함됩니다!" },
-  { id: 5, question: "다음 세 수 중 가장 큰 수는 무엇일까요?\n-5, -7/2, -1", options: ["-5", "-7/2", "-1", "비교할 수 없음"], answer: "-1", explanation: "-7/2는 -3.5입니다. 음수는 절댓값이 작을수록 크므로 -1이 가장 큽니다!" },
-  { id: 6, question: "-8 - (-4) 를 계산한 값은?", options: ["-12", "-4", "4", "12"], answer: "-4", explanation: "-8 - (-4) = -8 + (+4) = -4 가 됩니다!" },
-  { id: 7, question: "1개에 1200원인 빵 a개와 1500원인 우유 b개를 샀을 때 총 가격을 식으로 나타내면?", options: ["2700ab", "1500a + 1200b", "1200a + 1500b", "2700(a+b)"], answer: "1200a + 1500b", explanation: "(빵 1개 가격 × a) + (우유 1개 가격 × b) = 1200a + 1500b 입니다." },
-  { id: 8, question: "x = 3, y = -2 일 때, x² - 2y 의 값은?", options: ["5", "9", "13", "15"], answer: "13", explanation: "대입하면 3² - 2(-2) = 9 - (-4) = 9 + 4 = 13 입니다." },
-  { id: 9, question: "4(x - 1) - 3(x - 2) 를 간단히 한 것은?", options: ["x - 10", "x + 2", "x - 2", "7x - 10"], answer: "x + 2", explanation: "분배법칙으로 풀면 4x - 4 - 3x + 6 = x + 2 입니다." },
-  { id: 10, question: "x의 값이 1, 2, 3, 4일 때, 방정식 3x - 4 = 5 의 해는?", options: ["1", "2", "3", "4"], answer: "3", explanation: "3x = 9 가 되므로 해는 x = 3 입니다." },
-  { id: 11, question: "등식의 성질을 이용하여 2x - 5 = 7 을 풀기 위해 가장 먼저 해야 할 일은?", options: ["양변에 5를 더한다.", "양변에서 5를 뺀다.", "양변을 2로 나눈다.", "양변에 2를 곱한다."], answer: "양변에 5를 더한다.", explanation: "가장 먼저 좌변의 -5를 없애기 위해 양변에 5를 더해야 합니다." },
-  { id: 12, question: "다음 중 일차방정식인 것을 고르시오.", options: ["2x + 1 = 2(x - 3)", "x² = 0", "3x - 2 = x + 4", "5x + 3"], answer: "3x - 2 = x + 4", explanation: "2x+1=2x-6은 일차항이 소거되어 방정식이 아닙니다. 3x-2=x+4는 2x-6=0이 되어 일차방정식입니다." },
-  { id: 13, question: "점 P(4, -5)가 속하는 사분면은?", options: ["제1사분면", "제2사분면", "제3사분면", "제4사분면"], answer: "제4사분면", explanation: "x좌표가 양수(+), y좌표가 음수(-)이므로 제4사분면입니다." },
-  { id: 14, question: "정비례 관계 y = ax 의 그래프가 점 (-2, -6)을 지날 때, a의 값은?", options: ["-3", "1/3", "3", "8"], answer: "3", explanation: "y = ax 에 x=-2, y=-6을 대입하면 -6 = -2a, 따라서 a = 3 입니다." },
-  { id: 15, question: "직사각형의 한 변을 회전축으로 하여 1회전 시킬 때 만들어지는 입체도형은?", options: ["원기둥", "원뿔", "구", "원뿔대"], answer: "원기둥", explanation: "직사각형을 회전시키면 반듯한 기둥 모양인 원기둥이 됩니다." },
-  { id: 16, question: "한 모서리의 길이가 5cm인 정육면체의 겉넓이는?", options: ["100 cm²", "125 cm²", "150 cm²", "175 cm²"], answer: "150 cm²", explanation: "정육면체는 넓이가 25cm²인 정사각형 6개로 이루어져 있으므로 25 × 6 = 150 cm² 입니다." },
-  { id: 17, question: "밑면의 반지름의 길이가 5cm이고 높이가 6cm인 원기둥의 부피는?", options: ["30π cm³", "75π cm³", "150π cm³", "300π cm³"], answer: "150π cm³", explanation: "원기둥의 부피 = 밑넓이 × 높이 = (25π) × 6 = 150π cm³ 입니다." },
-  { id: 18, question: "칠각형의 대각선의 총 개수는?", options: ["14개", "20개", "27개", "35개"], answer: "14개", explanation: "n(n-3)/2 공식에 n=7을 대입하면 7 × 4 / 2 = 14개 입니다." },
-  { id: 19, question: "팔각형의 내각의 크기의 합은?", options: ["720°", "900°", "1080°", "1260°"], answer: "1080°", explanation: "180° × (8-2) = 180° × 6 = 1080° 입니다." },
-  { id: 20, question: "반지름의 길이가 6cm이고 중심각의 크기가 90°인 부채꼴의 넓이는?", options: ["6π cm²", "9π cm²", "12π cm²", "36π cm²"], answer: "9π cm²", explanation: "36π × (90/360) = 36π × 1/4 = 9π cm² 입니다." },
-  { id: 21, question: "공간에서 한 평면 위에 있지도 않고 만나지도 않는 두 직선의 위치 관계는?", options: ["평행", "수직", "꼬인 위치", "일치"], answer: "꼬인 위치", explanation: "공간에서 평행하지도 만나지도 않는 관계를 꼬인 위치라고 합니다." },
-  { id: 22, question: "두 평행한 직선과 한 직선이 만날 때 생기는 엇각의 크기에 대한 설명으로 옳은 것은?", options: ["항상 서로 다르다.", "합이 180도이다.", "항상 서로 같다.", "합이 90도이다."], answer: "항상 서로 같다.", explanation: "평행선에서 엇각의 크기는 항상 완벽하게 일치합니다." },
-  { id: 23, question: "두 변의 길이가 각각 같고, 그 끼인각의 크기가 같을 때의 합동 조건은?", options: ["SSS 합동", "SAS 합동", "ASA 합동", "RHA 합동"], answer: "SAS 합동", explanation: "Side(변)-Angle(각)-Side(변) 이므로 SAS 합동입니다." },
-  { id: 24, question: "지름의 길이가 8cm인 원의 넓이는?", options: ["8π cm²", "16π cm²", "32π cm²", "64π cm²"], answer: "16π cm²", explanation: "지름이 8cm이면 반지름은 4cm입니다. 원의 넓이 = πr² = 16π cm² 입니다." },
-  { id: 25, question: "수학 점수가 80점, 90점, 85점, 95점인 4명의 평균 점수는?", options: ["85점", "87.5점", "90점", "92.5점"], answer: "87.5점", explanation: "(80+90+85+95) / 4 = 350 / 4 = 87.5점 입니다." }
+  { id: 1, question: "?ㅼ쓬 ??以??뚯닔瑜?紐⑤몢 怨좊Ⅸ 寃껋??\n{2, 7, 9, 14, 17, 21, 23}", options: ["2, 7, 17", "2, 7, 17, 23", "7, 17, 23", "2, 9, 17, 21"], answer: "2, 7, 17, 23", explanation: "?뚯닔??1怨??먭린 ?먯떊留뚯쓣 ?쎌닔濡?媛吏???섏엯?덈떎. 2, 7, 17, 23???뚯닔?낅땲??" },
+  { id: 2, question: "?ㅼ쓬? 120???뚯씤?섎텇?댄븯??怨쇱젙?대떎. (媛)? (?????ㅼ뼱媛??섏쓽 ?⑹??\n120 = 2쨀 횞 (媛)\n(媛) = 3 횞 (??", options: ["15", "20", "25", "30"], answer: "20", explanation: "120 = 8 횞 15 ?대?濡?(媛)??15?낅땲?? 15 = 3 횞 5 ?대?濡?(????5?낅땲?? ?⑹? 15 + 5 = 20 ?낅땲??" },
+  { id: 3, question: "36(2짼횞3짼)怨?40(2쨀횞5)??理쒖냼怨듬같?섎뒗?", options: ["2짼횞3짼", "2쨀횞3짼횞5", "2쨀횞5", "2짼횞3짼횞5"], answer: "2쨀횞3짼횞5", explanation: "理쒖냼怨듬같?섎뒗 怨듯넻???뚯씤??以?吏?섍? ??寃껉낵 怨듯넻???꾨땶 寃껋쓣 紐⑤몢 怨깊븯誘濡?2쨀 횞 3짼 횞 5 (360) ?낅땲??" },
+  { id: 4, question: "?뺤닔? ?좊━?섏뿉 ????ㅻ챸 以??녹? 寃껋??", options: ["紐⑤뱺 ?좊━?섎뒗 ?뺤닔?대떎.", "紐⑤뱺 ?뺤닔???좊━?섏씠??", "0? ?좊━?섍? ?꾨땲??", "?먯뿰?섎뒗 ?뚯쓽 ?뺤닔?대떎."], answer: "紐⑤뱺 ?뺤닔???좊━?섏씠??", explanation: "?뺤닔??遺꾩닔 瑗대줈 ?섑??????덉쑝誘濡?紐⑤몢 ?좊━?섏뿉 ?ы븿?⑸땲??" },
+  { id: 5, question: "?ㅼ쓬 ????以?媛?????섎뒗 臾댁뾿?쇨퉴??\n-5, -7/2, -1", options: ["-5", "-7/2", "-1", "鍮꾧탳?????놁쓬"], answer: "-1", explanation: "-7/2??-3.5?낅땲?? ?뚯닔???덈뙎媛믪씠 ?묒쓣?섎줉 ?щ?濡?-1??媛???쎈땲??" },
+  { id: 6, question: "-8 - (-4) 瑜?怨꾩궛??媛믪??", options: ["-12", "-4", "4", "12"], answer: "-4", explanation: "-8 - (-4) = -8 + (+4) = -4 媛 ?⑸땲??" },
+  { id: 7, question: "1媛쒖뿉 1200?먯씤 鍮?a媛쒖? 1500?먯씤 ?곗쑀 b媛쒕? ?????珥?媛寃⑹쓣 ?앹쑝濡??섑??대㈃?", options: ["2700ab", "1500a + 1200b", "1200a + 1500b", "2700(a+b)"], answer: "1200a + 1500b", explanation: "(鍮?1媛?媛寃?횞 a) + (?곗쑀 1媛?媛寃?횞 b) = 1200a + 1500b ?낅땲??" },
+  { id: 8, question: "x = 3, y = -2 ???? x짼 - 2y ??媛믪??", options: ["5", "9", "13", "15"], answer: "13", explanation: "??낇븯硫?3짼 - 2(-2) = 9 - (-4) = 9 + 4 = 13 ?낅땲??" },
+  { id: 9, question: "4(x - 1) - 3(x - 2) 瑜?媛꾨떒????寃껋??", options: ["x - 10", "x + 2", "x - 2", "7x - 10"], answer: "x + 2", explanation: "遺꾨같踰뺤튃?쇰줈 ?硫?4x - 4 - 3x + 6 = x + 2 ?낅땲??" },
+  { id: 10, question: "x??媛믪씠 1, 2, 3, 4???? 諛⑹젙??3x - 4 = 5 ???대뒗?", options: ["1", "2", "3", "4"], answer: "3", explanation: "3x = 9 媛 ?섎?濡??대뒗 x = 3 ?낅땲??" },
+  { id: 11, question: "?깆떇???깆쭏???댁슜?섏뿬 2x - 5 = 7 ???湲??꾪빐 媛??癒쇱? ?댁빞 ???쇱??", options: ["?묐???5瑜??뷀븳??", "?묐??먯꽌 5瑜?類??", "?묐???2濡??섎늿??", "?묐???2瑜?怨깊븳??"], answer: "?묐???5瑜??뷀븳??", explanation: "媛??癒쇱? 醫뚮???-5瑜??놁븷湲??꾪빐 ?묐???5瑜??뷀빐???⑸땲??" },
+  { id: 12, question: "?ㅼ쓬 以??쇱감諛⑹젙?앹씤 寃껋쓣 怨좊Ⅴ?쒖삤.", options: ["2x + 1 = 2(x - 3)", "x짼 = 0", "3x - 2 = x + 4", "5x + 3"], answer: "3x - 2 = x + 4", explanation: "2x+1=2x-6? ?쇱감??씠 ?뚭굅?섏뼱 諛⑹젙?앹씠 ?꾨떃?덈떎. 3x-2=x+4??2x-6=0???섏뼱 ?쇱감諛⑹젙?앹엯?덈떎." },
+  { id: 13, question: "??P(4, -5)媛 ?랁븯???щ텇硫댁??", options: ["???щ텇硫?, "???щ텇硫?, "???щ텇硫?, "???щ텇硫?], answer: "???щ텇硫?, explanation: "x醫뚰몴媛 ?묒닔(+), y醫뚰몴媛 ?뚯닔(-)?대?濡????щ텇硫댁엯?덈떎." },
+  { id: 14, question: "?뺣퉬濡 愿怨?y = ax ??洹몃옒?꾧? ??(-2, -6)??吏???? a??媛믪??", options: ["-3", "1/3", "3", "8"], answer: "3", explanation: "y = ax ??x=-2, y=-6????낇븯硫?-6 = -2a, ?곕씪??a = 3 ?낅땲??" },
+  { id: 15, question: "吏곸궗媛곹삎????蹂???뚯쟾異뺤쑝濡??섏뿬 1?뚯쟾 ?쒗궗 ??留뚮뱾?댁????낆껜?꾪삎??", options: ["?먭린??, "?먮퓭", "援?, "?먮퓭?"], answer: "?먭린??, explanation: "吏곸궗媛곹삎???뚯쟾?쒗궎硫?諛섎벏??湲곕뫁 紐⑥뼇???먭린?μ씠 ?⑸땲??" },
+  { id: 16, question: "??紐⑥꽌由ъ쓽 湲몄씠媛 5cm???뺤쑁硫댁껜??寃됰꼻?대뒗?", options: ["100 cm짼", "125 cm짼", "150 cm짼", "175 cm짼"], answer: "150 cm짼", explanation: "?뺤쑁硫댁껜???볦씠媛 25cm짼???뺤궗媛곹삎 6媛쒕줈 ?대（?댁졇 ?덉쑝誘濡?25 횞 6 = 150 cm짼 ?낅땲??" },
+  { id: 17, question: "諛묐㈃??諛섏?由꾩쓽 湲몄씠媛 5cm?닿퀬 ?믪씠媛 6cm???먭린?μ쓽 遺?쇰뒗?", options: ["30? cm쨀", "75? cm쨀", "150? cm쨀", "300? cm쨀"], answer: "150? cm쨀", explanation: "?먭린?μ쓽 遺??= 諛묐꼻??횞 ?믪씠 = (25?) 횞 6 = 150? cm쨀 ?낅땲??" },
+  { id: 18, question: "移좉컖?뺤쓽 ?媛곸꽑??珥?媛쒖닔??", options: ["14媛?, "20媛?, "27媛?, "35媛?], answer: "14媛?, explanation: "n(n-3)/2 怨듭떇??n=7????낇븯硫?7 횞 4 / 2 = 14媛??낅땲??" },
+  { id: 19, question: "?붽컖?뺤쓽 ?닿컖???ш린???⑹??", options: ["720째", "900째", "1080째", "1260째"], answer: "1080째", explanation: "180째 횞 (8-2) = 180째 횞 6 = 1080째 ?낅땲??" },
+  { id: 20, question: "諛섏?由꾩쓽 湲몄씠媛 6cm?닿퀬 以묒떖媛곸쓽 ?ш린媛 90째??遺梨꾧섦???볦씠??", options: ["6? cm짼", "9? cm짼", "12? cm짼", "36? cm짼"], answer: "9? cm짼", explanation: "36? 횞 (90/360) = 36? 횞 1/4 = 9? cm짼 ?낅땲??" },
+  { id: 21, question: "怨듦컙?먯꽌 ???됰㈃ ?꾩뿉 ?덉????딄퀬 留뚮굹吏???딅뒗 ??吏곸꽑???꾩튂 愿怨꾨뒗?", options: ["?됲뻾", "?섏쭅", "瑗ъ씤 ?꾩튂", "?쇱튂"], answer: "瑗ъ씤 ?꾩튂", explanation: "怨듦컙?먯꽌 ?됲뻾?섏???留뚮굹吏???딅뒗 愿怨꾨? 瑗ъ씤 ?꾩튂?쇨퀬 ?⑸땲??" },
+  { id: 22, question: "???됲뻾??吏곸꽑怨???吏곸꽑??留뚮궇 ???앷린???뉕컖???ш린??????ㅻ챸?쇰줈 ?녹? 寃껋??", options: ["??긽 ?쒕줈 ?ㅻⅤ??", "?⑹씠 180?꾩씠??", "??긽 ?쒕줈 媛숇떎.", "?⑹씠 90?꾩씠??"], answer: "??긽 ?쒕줈 媛숇떎.", explanation: "?됲뻾?좎뿉???뉕컖???ш린????긽 ?꾨꼍?섍쾶 ?쇱튂?⑸땲??" },
+  { id: 23, question: "??蹂??湲몄씠媛 媛곴컖 媛숆퀬, 洹??쇱씤媛곸쓽 ?ш린媛 媛숈쓣 ?뚯쓽 ?⑸룞 議곌굔??", options: ["SSS ?⑸룞", "SAS ?⑸룞", "ASA ?⑸룞", "RHA ?⑸룞"], answer: "SAS ?⑸룞", explanation: "Side(蹂)-Angle(媛?-Side(蹂) ?대?濡?SAS ?⑸룞?낅땲??" },
+  { id: 24, question: "吏由꾩쓽 湲몄씠媛 8cm???먯쓽 ?볦씠??", options: ["8? cm짼", "16? cm짼", "32? cm짼", "64? cm짼"], answer: "16? cm짼", explanation: "吏由꾩씠 8cm?대㈃ 諛섏?由꾩? 4cm?낅땲?? ?먯쓽 ?볦씠 = ?r짼 = 16? cm짼 ?낅땲??" },
+  { id: 25, question: "?섑븰 ?먯닔媛 80?? 90?? 85?? 95?먯씤 4紐낆쓽 ?됯퇏 ?먯닔??", options: ["85??, "87.5??, "90??, "92.5??], answer: "87.5??, explanation: "(80+90+85+95) / 4 = 350 / 4 = 87.5???낅땲??" }
 ];
 
 export default function BasicMathGame2() {
   const [gameState, setGameState] = useState<"start" | "playing" | "end">("start");
   const [currentProblemIndex, setCurrentProblemIndex] = useState(0);
   const [score, setScore] = useState(0);
-  const [lives, setLives] = useState(5);
+  const [lives, setLives] = useState(10);
   const [feedback, setFeedback] = useState<{ type: "correct" | "wrong"; message: string } | null>(null);
 
   const startGame = () => {
     setScore(0);
-    setLives(5);
+    setLives(10);
     setCurrentProblemIndex(0);
     setGameState("playing");
     setFeedback(null);
@@ -62,10 +62,10 @@ export default function BasicMathGame2() {
 
     if (option === currentProblem.answer) {
       setScore(s => s + 10);
-      setFeedback({ type: "correct", message: "정답입니다! 🎉\n" + currentProblem.explanation });
+      setFeedback({ type: "correct", message: "?뺣떟?낅땲?? ?럦\n" + currentProblem.explanation });
     } else {
       setLives(l => l - 1);
-      setFeedback({ type: "wrong", message: "틀렸어요. 😢\n" + currentProblem.explanation });
+      setFeedback({ type: "wrong", message: "??몄뼱?? ?삟\n" + currentProblem.explanation });
     }
   };
 
@@ -92,18 +92,18 @@ export default function BasicMathGame2() {
               <Rocket className="w-16 h-16 text-violet-500" />
             </div>
             <h1 className="text-3xl sm:text-4xl font-black text-violet-900 dark:text-violet-100 mb-4">
-              기초 탄탄 마라톤 2탄! 🚀
+              湲곗큹 ?꾪깂 留덈씪??2?? ??
             </h1>
             <p className="text-violet-900/70 dark:text-violet-100/70 mb-8 text-lg font-medium leading-relaxed">
-              새로운 동형 문제들로 구성된 25단계 두 번째 스테이지!<br />
-              이번에도 확실하게 개념을 마스터해 봅시다.<br />
-              <strong className="text-violet-600 dark:text-violet-400">하트는 넉넉하게 5개!</strong> 가벼운 마음으로 출발~
+              ?덈줈???숉삎 臾몄젣?ㅻ줈 援ъ꽦??25?④퀎 ??踰덉㎏ ?ㅽ뀒?댁?!<br />
+              ?대쾲?먮룄 ?뺤떎?섍쾶 媛쒕뀗??留덉뒪?고빐 遊낆떆??<br />
+              <strong className="text-violet-600 dark:text-violet-400">?섑듃???됰꼮?섍쾶 5媛?</strong> 媛踰쇱슫 留덉쓬?쇰줈 異쒕컻~
             </p>
             <button
               onClick={startGame}
               className="px-10 py-4 bg-violet-500 hover:bg-violet-600 text-white rounded-full font-bold text-xl transition-all shadow-lg hover:shadow-violet-200 dark:hover:shadow-none hover:-translate-y-1"
             >
-              두 번째 게임 시작 🚀
+              ??踰덉㎏ 寃뚯엫 ?쒖옉 ??
             </button>
           </div>
         )}
@@ -117,7 +117,7 @@ export default function BasicMathGame2() {
                 </div>
               </div>
               <div className="flex items-center gap-1">
-                {[...Array(5)].map((_, i) => (
+                {[...Array(10)].map((_, i) => (
                   <Heart
                     key={i}
                     className={`w-7 h-7 transition-all duration-300 ${
@@ -173,7 +173,7 @@ export default function BasicMathGame2() {
                   onClick={nextProblem}
                   className="w-full py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-xl font-bold text-lg flex items-center justify-center gap-2 hover:opacity-90 transition-opacity"
                 >
-                  {lives <= 0 || currentProblemIndex === PROBLEMS.length - 1 ? "결과 보기" : "다음 문제로"} <ChevronRight />
+                  {lives <= 0 || currentProblemIndex === PROBLEMS.length - 1 ? "寃곌낵 蹂닿린" : "?ㅼ쓬 臾몄젣濡?} <ChevronRight />
                 </button>
               </div>
             )}
@@ -186,16 +186,16 @@ export default function BasicMathGame2() {
               <Trophy className="w-16 h-16 text-yellow-500" />
             </div>
             <h1 className="text-3xl font-black text-violet-900 dark:text-violet-100 mb-2">
-              도전 완료!
+              ?꾩쟾 ?꾨즺!
             </h1>
             <p className="text-violet-600 dark:text-violet-400 font-bold mb-6">
-              총 {PROBLEMS.length}스테이지 중 {currentProblemIndex + (lives > 0 ? 1 : 0)}스테이지 도달
+              珥?{PROBLEMS.length}?ㅽ뀒?댁? 以?{currentProblemIndex + (lives > 0 ? 1 : 0)}?ㅽ뀒?댁? ?꾨떖
             </p>
             
             <div className="flex justify-center items-center gap-4 mb-10">
               <div className="text-center">
-                <div className="text-5xl font-black text-violet-500 mb-1">{score}점</div>
-                <div className="text-sm font-bold text-gray-500">최종 점수</div>
+                <div className="text-5xl font-black text-violet-500 mb-1">{score}??/div>
+                <div className="text-sm font-bold text-gray-500">理쒖쥌 ?먯닔</div>
               </div>
             </div>
 
@@ -204,13 +204,13 @@ export default function BasicMathGame2() {
                 onClick={startGame}
                 className="flex items-center justify-center gap-2 px-8 py-4 bg-violet-500 hover:bg-violet-600 text-white rounded-full font-bold text-lg transition-all shadow-lg"
               >
-                <RefreshCcw className="w-5 h-5" /> 다시 도전하기
+                <RefreshCcw className="w-5 h-5" /> ?ㅼ떆 ?꾩쟾?섍린
               </button>
               <Link
                 href="/"
                 className="flex items-center justify-center gap-2 px-8 py-4 bg-white dark:bg-violet-900/20 border-2 border-violet-100 dark:border-violet-900 text-violet-900 dark:text-violet-100 rounded-full font-bold text-lg transition-all hover:bg-violet-50"
               >
-                <ArrowLeft className="w-5 h-5" /> 메인으로
+                <ArrowLeft className="w-5 h-5" /> 硫붿씤?쇰줈
               </Link>
             </div>
           </div>
@@ -219,3 +219,4 @@ export default function BasicMathGame2() {
     </div>
   );
 }
+

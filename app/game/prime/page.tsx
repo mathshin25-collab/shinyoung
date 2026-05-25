@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect, useCallback } from "react";
 import { ArrowLeft, Trophy, Timer, Heart, RefreshCcw, CheckCircle2, XCircle } from "lucide-react";
@@ -8,7 +8,7 @@ export default function PrimeGame() {
   const [gameState, setGameState] = useState<"start" | "playing" | "end">("start");
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(60);
-  const [lives, setLives] = useState(3);
+  const [lives, setLives] = useState(10);
   const [currentNumber, setCurrentNumber] = useState<number>(2);
   const [feedback, setFeedback] = useState<{ type: "correct" | "wrong"; message: string } | null>(null);
   const [playerName, setPlayerName] = useState("");
@@ -32,7 +32,7 @@ export default function PrimeGame() {
   const startGame = () => {
     setScore(0);
     setTimeLeft(60);
-    setLives(3);
+    setLives(10);
     setSubmitted(false);
     setPlayerName("");
     setGameState("playing");
@@ -73,12 +73,12 @@ export default function PrimeGame() {
     const correct = isPrime(currentNumber);
     if (answerIsPrime === correct) {
       setScore((s) => s + 10);
-      setFeedback({ type: "correct", message: "정답!" });
+      setFeedback({ type: "correct", message: "?뺣떟!" });
       setTimeout(() => {
         generateProblem();
       }, 500);
     } else {
-      setFeedback({ type: "wrong", message: "앗, 틀렸어요!" });
+      setFeedback({ type: "wrong", message: "?? ??몄뼱??" });
       setLives((l) => {
         const newLives = l - 1;
         if (newLives <= 0) {
@@ -105,18 +105,17 @@ export default function PrimeGame() {
               <Timer className="w-12 h-12 text-pink-500" />
             </div>
             <h1 className="text-3xl font-bold text-pink-900 dark:text-pink-100 mb-4">
-              중1 소수 찾기 스피드 게임 ⚡
-            </h1>
+              以? ?뚯닔 李얘린 ?ㅽ뵾??寃뚯엫 ??            </h1>
             <p className="text-pink-900/60 dark:text-pink-100/60 mb-8 text-lg">
-              <strong>1분</strong> 동안 최대한 많은 숫자를 보고 소수인지 합성수인지 맞혀보세요!<br />
-              정답을 맞힐 때마다 10점을 얻어요. 기회는 <strong>3번</strong>입니다.
+              <strong>1遺?/strong> ?숈븞 理쒕???留롮? ?レ옄瑜?蹂닿퀬 ?뚯닔?몄? ?⑹꽦?섏씤吏 留욏?蹂댁꽭??<br />
+              ?뺣떟??留욏옄 ?뚮쭏??10?먯쓣 ?살뼱?? 湲고쉶??<strong>3踰?/strong>?낅땲??
             </p>
 
             <button
               onClick={startGame}
               className="px-10 py-4 bg-pink-400 hover:bg-pink-500 text-white rounded-full font-bold text-lg transition-all shadow-lg hover:shadow-pink-200 dark:hover:shadow-none"
             >
-              게임 시작하기 🚀
+              寃뚯엫 ?쒖옉?섍린 ??
             </button>
           </div>
         )}
@@ -129,10 +128,9 @@ export default function PrimeGame() {
                 <span className="font-bold text-pink-900 dark:text-pink-100 text-xl">Score: {score}</span>
               </div>
               <div className="flex items-center gap-2 font-black text-xl text-pink-500 bg-pink-50 dark:bg-pink-900/20 px-4 py-2 rounded-full">
-                <Timer className="w-5 h-5" /> {timeLeft}초
-              </div>
+                <Timer className="w-5 h-5" /> {timeLeft}珥?              </div>
               <div className="flex items-center gap-1">
-                {[...Array(3)].map((_, i) => (
+                {[...Array(10)].map((_, i) => (
                   <Heart
                     key={i}
                     className={`w-6 h-6 transition-colors ${
@@ -144,7 +142,7 @@ export default function PrimeGame() {
             </div>
 
             <div className="py-12 bg-white dark:bg-pink-950/40 rounded-2xl border border-pink-50 dark:border-pink-900 text-center relative overflow-hidden">
-              <span className="text-pink-400 text-sm font-bold mb-2 block tracking-widest">이 숫자는?</span>
+              <span className="text-pink-400 text-sm font-bold mb-2 block tracking-widest">???レ옄??</span>
               <h2 className="text-6xl md:text-8xl font-black text-pink-900 dark:text-pink-100">
                 {currentNumber}
               </h2>
@@ -156,14 +154,14 @@ export default function PrimeGame() {
                 disabled={!!feedback}
                 className="py-6 px-6 rounded-2xl font-bold text-xl md:text-2xl border-2 transition-all bg-white dark:bg-pink-900/20 border-pink-100 dark:border-pink-900 text-pink-900 dark:text-pink-100 hover:border-pink-400 hover:bg-pink-50 dark:hover:bg-pink-900/40 active:scale-95"
               >
-                소수다!
+                ?뚯닔??
               </button>
               <button
                 onClick={() => handleAnswer(false)}
                 disabled={!!feedback}
                 className="py-6 px-6 rounded-2xl font-bold text-xl md:text-2xl border-2 transition-all bg-white dark:bg-pink-900/20 border-pink-100 dark:border-pink-900 text-pink-900 dark:text-pink-100 hover:border-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/40 active:scale-95"
               >
-                합성수다!
+                ?⑹꽦?섎떎!
               </button>
             </div>
 
@@ -188,18 +186,17 @@ export default function PrimeGame() {
               <Trophy className="w-12 h-12 text-yellow-500" />
             </div>
             <h1 className="text-3xl font-bold text-pink-900 dark:text-pink-100 mb-2">
-              게임 종료! ⏰
-            </h1>
-            <p className="text-5xl font-black text-pink-500 mb-4">{score}점</p>
+              寃뚯엫 醫낅즺! ??            </h1>
+            <p className="text-5xl font-black text-pink-500 mb-4">{score}??/p>
             <p className="text-pink-900/60 dark:text-pink-100/60 mb-8 text-lg">
-              정말 훌륭해요! 당신이 진정한 1등입니다! 🎉
+              ?뺣쭚 ?뚮??댁슂! ?뱀떊??吏꾩젙??1?깆엯?덈떎! ?럦
             </p>
 
             {!submitted ? (
               <div className="max-w-xs mx-auto mb-8 flex flex-col gap-3">
                 <input
                   type="text"
-                  placeholder="당신의 멋진 닉네임"
+                  placeholder="?뱀떊??硫뗭쭊 ?됰꽕??
                   maxLength={10}
                   value={playerName}
                   onChange={(e) => setPlayerName(e.target.value)}
@@ -210,12 +207,12 @@ export default function PrimeGame() {
                   disabled={!playerName.trim() || isSubmitting}
                   className="w-full py-3 bg-gradient-to-r from-pink-400 to-pink-500 hover:from-pink-500 hover:to-pink-600 text-white rounded-xl font-bold transition-all shadow-md disabled:opacity-50"
                 >
-                  {isSubmitting ? "등록 중..." : "명예의 전당 등록하기 🏆"}
+                  {isSubmitting ? "?깅줉 以?.." : "紐낆삁???꾨떦 ?깅줉?섍린 ?룇"}
                 </button>
               </div>
             ) : (
               <div className="mb-8 p-4 bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 rounded-xl font-bold flex items-center justify-center gap-2">
-                <CheckCircle2 /> 랭킹 등록 완료!
+                <CheckCircle2 /> ??궧 ?깅줉 ?꾨즺!
               </div>
             )}
 
@@ -224,19 +221,19 @@ export default function PrimeGame() {
                 onClick={startGame}
                 className="flex items-center justify-center gap-2 px-8 py-3 bg-pink-400 hover:bg-pink-500 text-white rounded-full font-bold transition-all shadow-lg"
               >
-                <RefreshCcw className="w-5 h-5" /> 다시 하기
+                <RefreshCcw className="w-5 h-5" /> ?ㅼ떆 ?섍린
               </button>
               <Link
                 href="/ranking"
                 className="flex items-center justify-center gap-2 px-8 py-3 bg-white dark:bg-pink-900/20 border-2 border-pink-100 dark:border-pink-900 text-pink-900 dark:text-pink-100 rounded-full font-bold transition-all hover:bg-pink-50 dark:hover:bg-pink-900/40"
               >
-                <Trophy className="w-5 h-5" /> 랭킹 확인
+                <Trophy className="w-5 h-5" /> ??궧 ?뺤씤
               </Link>
               <Link
                 href="/"
                 className="flex items-center justify-center gap-2 px-8 py-3 bg-white dark:bg-pink-900/20 border-2 border-pink-100 dark:border-pink-900 text-pink-900 dark:text-pink-100 rounded-full font-bold transition-all hover:bg-pink-50 dark:hover:bg-pink-900/40"
               >
-                <ArrowLeft className="w-5 h-5" /> 메인으로
+                <ArrowLeft className="w-5 h-5" /> 硫붿씤?쇰줈
               </Link>
             </div>
           </div>
@@ -245,3 +242,4 @@ export default function PrimeGame() {
     </div>
   );
 }
+
